@@ -8,7 +8,7 @@ public class Solver {
     private double MASS = 1;
     private double PLANCK = 1;
     private double Uo = 1;
-    private double A = 5; //менять тут
+    private double A = 15; //менять тут
 
     private double accuracy = 0.01;
 

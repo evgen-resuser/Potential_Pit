@@ -43,7 +43,8 @@ public class CustomGraphBuilder extends JPanel {
         g2d.drawString("Симметричн. (tg)", 20, 410);
 
         for (double E : listTg){
-            int dot = 430 - (int)(abs(E) * 430) + 20;
+            //int dot = 430 - (int)(abs(E) * 430) + 20;
+            int dot = 20 + (int)(abs(E) * 430);
             g2d.drawLine(150, dot, 350, dot);
             g2d.drawString(Double.toString((double) round(E * 100) /100), 360, dot);
         }
@@ -53,7 +54,7 @@ public class CustomGraphBuilder extends JPanel {
         g2d.drawString("Антисимм. (ctg)", 20, 430);
 
         for (double E : listCtg){
-            int dot = 430 - (int)(abs(E) * 430) + 20;
+            int dot = 20 + (int)(abs(E) * 430);
             g2d.drawLine(150, dot, 350, dot);
             g2d.drawString(Double.toString((double) round(E * 100) /100), 360, dot);
         }
