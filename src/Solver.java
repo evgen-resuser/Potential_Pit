@@ -6,9 +6,9 @@ import static java.lang.Math.*;
 public class Solver {
 
     private double MASS = 1;
-    private double PLANCK = 1;//1.05e-34;
+    private double PLANCK = 1;
     private double Uo = 1;
-    private double A = 15;//1e-34;
+    private double A = 5; //менять тут
 
     private double accuracy = 0.01;
 
@@ -77,7 +77,7 @@ public class Solver {
         DecompositionSolver solver = new LUDecomposition(coefficients).getSolver();
         RealVector constants = new ArrayRealVector(new double[] { 1, 0 }, false);
         RealVector solution = solver.solve(constants);
-        System.out.println(E+": " +solution);
+        //System.out.println(E+": " +solution);
 
         double B = sqrt(solution.getEntry(0));
         double C = sqrt(solution.getEntry(1));
@@ -103,19 +103,12 @@ public class Solver {
 
         double v22tmp = sin(k1*A/2);
         double v22 = -exp(-A * k2)/(v22tmp*v22tmp);
-//        double sin = sin(k1*A/2);
-//        double exp = exp(-k2 * A / 2);
-//
-//        double v11 = 0.5 * (A - (sin(A*k1)/k1));
-//        double v21 = exp*exp / k2;
-//        double v12 = 1;
-//        double v22 = -(exp*exp)/(sin*sin);
 
         RealMatrix coefficients = new Array2DRowRealMatrix(new double[][] {{ v11, v12 }, { v21, v22 }}, false);
         DecompositionSolver solver = new LUDecomposition(coefficients).getSolver();
         RealVector constants = new ArrayRealVector(new double[] { 1, 0 }, false);
         RealVector solution = solver.solve(constants);
-        System.out.println(E+": " +solution);
+        //System.out.println(E+": " +solution);
 
         double B = sqrt(solution.getEntry(0));
         double C = sqrt(solution.getEntry(1));
@@ -130,8 +123,8 @@ public class Solver {
         }
         context.getCtgBMap().put(E, B);
         context.getCtgCMap().put(E, C);
-        System.out.println(E+": B="+B+" C="+C);
-        System.out.println(E+": k1="+k1+" k2="+k2);
+        //System.out.println(E+": B="+B+" C="+C);
+        //System.out.println(E+": k1="+k1+" k2="+k2);
     }
 
 }

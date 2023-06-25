@@ -2,8 +2,12 @@ import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.chart.plot.XYPlot;
+import org.jfree.chart.renderer.xy.XYLineAndShapeRenderer;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
+
+import java.awt.*;
 
 import static java.lang.Math.*;
 
@@ -19,12 +23,24 @@ public class CtgCurves {
     private void drawCurves(){
         XYSeriesCollection collection = new XYSeriesCollection();
 
+        double a = context.getA();
+
+        XYSeries pit = new XYSeries("pit");
+        pit.add(-a*2, 0.001);
+        pit.add(-a*2, 0);
+        pit.add(-a/2, 0);
+        pit.add(-a/2, -1);
+        pit.add(a/2, -1);
+        pit.add(a/2, 0);
+        pit.add(a*2, 0);
+
+        collection.addSeries(pit);
+
         for (int i = 0; i != context.getCtgList().size(); i++){
 
-            XYSeries series = new XYSeries(i*20);
-
-            double a = context.getA();
             double E = context.getCtgList().get(i);
+
+            XYSeries series = new XYSeries(Double.toString((double) round(E * 100) /100));
 
             double b = context.getCtgBMap().get(E);
             double c = context.getCtgCMap().get(E);
@@ -54,7 +70,13 @@ public class CtgCurves {
                 .createXYLineChart("", "", "",
                         collection,
                         PlotOrientation.VERTICAL,
-                        false, true, true);
+                        true, true, true);
+
+        XYPlot plot = (XYPlot) chart.getPlot();
+        XYLineAndShapeRenderer renderer = new XYLineAndShapeRenderer(true, false);
+        renderer.setSeriesPaint(0, Color.BLACK);
+
+        plot.setRenderer(renderer);
 
         panel = new ChartPanel(chart);
         panel.setSize(500, 500);

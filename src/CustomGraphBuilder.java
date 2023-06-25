@@ -40,7 +40,7 @@ public class CustomGraphBuilder extends JPanel {
 
         g2d.setColor(Color.RED);
 
-        g2d.drawString("Симметричн. (tg)", 20, 400);
+        g2d.drawString("Симметричн. (tg)", 20, 410);
 
         for (double E : listTg){
             int dot = 430 - (int)(abs(E) * 430) + 20;
